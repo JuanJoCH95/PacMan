@@ -5,6 +5,7 @@
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include "personaje.h"
+#include "fantasma.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -20,9 +21,14 @@ public:
     ~MainWindow();
     void keyPressEvent(QKeyEvent*);
 
+private slots:
+    void actualizarEscena();
+
 private:
+    QTimer* timer = nullptr;
     Ui::MainWindow *ui;
     QGraphicsScene* scene;
     Personaje* personaje;
+    Fantasma* fantasma;
 };
 #endif // MAINWINDOW_H

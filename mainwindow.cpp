@@ -3,8 +3,10 @@
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
+    timer = new QTimer(this);
     scene = new QGraphicsScene(this);
     personaje = new Personaje;
+    fantasma = new Fantasma;
 
     scene->setSceneRect(0, 0, ui->graphicsView->width(), ui->graphicsView->height());
     ui->graphicsView->setScene(scene);
@@ -17,10 +19,17 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     scene->addItem(personaje);
     personaje->setPos(0,0);
+
+    scene->addItem(fantasma);
+    fantasma->setPosition(250,250);
+    timer->start(20);
+    connect(timer, SIGNAL(timeout()), this, SLOT(actualizarEscena()));
 }
 
 MainWindow::~MainWindow() {
+    delete timer;
     delete personaje;
+    delete fantasma;
     delete scene;
     delete ui;
 }
@@ -40,4 +49,9 @@ void MainWindow::keyPressEvent(QKeyEvent *event) {
             personaje->moveDown();
         }
     }
+}
+
+void MainWindow::actualizarEscena(){
+    fantasma->move();
+    fantasma->checkCollision();
 }
