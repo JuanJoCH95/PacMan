@@ -35,11 +35,20 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     timer->start(20);
     connect(timer, SIGNAL(timeout()), this, SLOT(actualizarEscena()));
 
-    int ancho = 50, alto = 383;
+    int ancho = 50, alto = 383, m = 0;
     for(auto e : monedas) {
         scene->addItem(e);
         e->setPos(ancho,alto);
         ancho += 75;
+
+        if(m == 2 || m == 3 || m == 4) {
+            alto = 214;
+        } else if(m == 6 || m == 7 || m == 8) {
+            alto = 500;
+        } else {
+            alto = 383;
+        }
+        m+=1;
     }
 }
 
@@ -77,23 +86,29 @@ void MainWindow::actualizarEscena() {
         for(auto c : colisionesFantasma) {
             Personaje *pacman = dynamic_cast<Personaje*>(c);
             if(pacman) {
-                personaje = nullptr;
                 delete fantasma;
                 timer->stop();
                 QMessageBox::information(this, "", "GAME OVER!");
+                QApplication::quit();
             }
         }
     }
 
-    for(auto e : monedas) {
-        QList<QGraphicsItem*> colisionesPoint = scene->collidingItems(e);
-        if(!colisionesPoint.isEmpty()) {
-            for(auto c : colisionesPoint) {
-                Personaje *pacman = dynamic_cast<Personaje*>(c);
-                if(pacman) {
-                    scene->removeItem(e);
-                }
+    QList<QGraphicsItem*> colisionesPoint = scene->collidingItems(personaje);
+    if(!colisionesPoint.isEmpty()) {
+        for(auto c : colisionesPoint) {
+            Monedas *moneda = dynamic_cast<Monedas*>(c);
+            if(moneda) {
+                scene->removeItem(moneda);
+                contColisiones++;
             }
         }
+    }
+
+    if(contColisiones == 10) {
+        delete fantasma;
+        timer->stop();
+        QMessageBox::information(this, "", "YOU WIN!");
+        QApplication::quit();
     }
 }

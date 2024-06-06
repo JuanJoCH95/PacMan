@@ -34,5 +34,6 @@ private:
     Personaje* personaje;
     Fantasma* fantasma;
     QVector<Monedas*> monedas;
+    int contColisiones = 0;
 };
 #endif // MAINWINDOW_H
