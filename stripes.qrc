@@ -3,5 +3,6 @@
         <file>Imagenes/pacman.png</file>
         <file>Imagenes/fondo.jpg</file>
         <file>Imagenes/fantasma.png</file>
+        <file>Imagenes/moneda.png</file>
     </qresource>
 </RCC>

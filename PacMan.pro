@@ -12,11 +12,13 @@ SOURCES += \
     fantasma.cpp \
     main.cpp \
     mainwindow.cpp \
+    monedas.cpp \
     personaje.cpp
 
 HEADERS += \
     fantasma.h \
     mainwindow.h \
+    monedas.h \
     personaje.h
 
 FORMS += \

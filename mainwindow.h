@@ -4,8 +4,11 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QKeyEvent>
+#include <QMessageBox>
+#include <QVector>
 #include "personaje.h"
 #include "fantasma.h"
+#include "monedas.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -30,5 +33,6 @@ private:
     QGraphicsScene* scene;
     Personaje* personaje;
     Fantasma* fantasma;
+    QVector<Monedas*> monedas;
 };
 #endif // MAINWINDOW_H
