@@ -27,6 +27,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     auto scaledBack = background.scaled(800, 600);
     ui->graphicsView->setBackgroundBrush(scaledBack);
 
+    music->setMedia(QUrl("qrc:/Sound/Sonido8bts.wav"));
+    music->play();
+
     scene->addItem(personaje);
     personaje->setPos(0,0);
 
@@ -58,6 +61,7 @@ MainWindow::~MainWindow() {
     delete fantasma;
     delete scene;
     delete ui;
+    delete music;
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event) {
@@ -88,6 +92,7 @@ void MainWindow::actualizarEscena() {
             if(pacman) {
                 delete fantasma;
                 timer->stop();
+                music->stop();
                 QMessageBox::information(this, "", "GAME OVER!");
                 QApplication::quit();
             }
@@ -108,6 +113,7 @@ void MainWindow::actualizarEscena() {
     if(contColisiones == 10) {
         delete fantasma;
         timer->stop();
+        music->stop();
         QMessageBox::information(this, "", "YOU WIN!");
         QApplication::quit();
     }

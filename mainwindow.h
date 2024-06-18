@@ -6,6 +6,7 @@
 #include <QKeyEvent>
 #include <QMessageBox>
 #include <QVector>
+#include <QMediaPlayer>
 #include "personaje.h"
 #include "fantasma.h"
 #include "monedas.h"
@@ -35,5 +36,6 @@ private:
     Fantasma* fantasma;
     QVector<Monedas*> monedas;
     int contColisiones = 0;
+    QMediaPlayer * music = new QMediaPlayer();
 };
 #endif // MAINWINDOW_H

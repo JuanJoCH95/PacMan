@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Sound/Sonido8bts.wav</file>
+    </qresource>
+</RCC>
